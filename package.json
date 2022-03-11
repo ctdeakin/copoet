@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ctdeakin/copoet#readme",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "openai": "^2.0.4"
   }
 }
