@@ -19,7 +19,6 @@ module.exports = {
     path: path.resolve(__dirname, './public'),
     filename: 'bundle.js',
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
   devServer: {
     static: path.resolve(__dirname, './public'),
     hot: true
