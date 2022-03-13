@@ -5,8 +5,7 @@ import Title from './Title.jsx'
 export default function Home() {
     return (
         <div>
-            <Title/>
-           <Editor/>
+           <Editor />
         </div>
     )
 }

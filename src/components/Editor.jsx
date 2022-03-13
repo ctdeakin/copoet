@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import useAI from './hooks/useAI.jsx'
+import useTitle from './hooks/useTitle.jsx'
+import Title from './Title.jsx'
 
 export default function MyEditor(props) {
   const [poem, setPoem] = useState([]);
   const [line, setLine] = useState('');
-  const {newCompletion}= useAI( 'Sheep dream of cotton robots')
+  const [title, setTitle] = useTitle('')
+  const {newCompletion}= useAI(title||'')
 
   function handleChange(e) {
     setLine(e.target.value);
@@ -34,6 +37,7 @@ export default function MyEditor(props) {
 
   return (
     <div>
+      <Title setTitle={setTitle} title={title}/>
       {poem.map((line,idx) => (
         <div key={idx}>{line}</div>
       ))}
