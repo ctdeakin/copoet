@@ -1,7 +1,10 @@
 const webpack = require('webpack');
 const path = require('path');
-
-module.exports = {
+const Dotenv = require('dotenv-webpack');
+require('dotenv').config({ path: './.env' })
+module.exports = (env) => {
+  
+  return {
   entry: path.resolve(__dirname, './src/index.jsx'),
   module: {
     rules: [
@@ -13,14 +16,23 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['*', '.js', 'jsx']
+    extensions: ['*', '.js', 'jsx'],
+    fallback: {
+      "fs": false,
+      "path": false,
+      "os": false
+    }
   },
   output: {
     path: path.resolve(__dirname, './public'),
     filename: 'bundle.js',
   },
+  plugins: [
+    new webpack.EnvironmentPlugin(['OPENAI_API_KEY']),
+    "@babel/plugin-transform-runtime"
+  ],
   devServer: {
     static: path.resolve(__dirname, './public'),
     hot: true
   },
-};
+}};

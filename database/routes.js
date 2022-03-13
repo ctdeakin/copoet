@@ -1,8 +1,6 @@
 
 const { Configuration, OpenAIApi } = require("openai");
 
-
-
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -14,8 +12,7 @@ async function completeMe(prompt) {
         prompt: prompt,
         max_tokens: 6
     })
-
     console.log(data)
+    return 'Successful Call'
 } 
 
-completeMe('Say Hello World')
