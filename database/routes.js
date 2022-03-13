@@ -8,11 +8,12 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration)
 
 async function completeMe(prompt) {
-    const {data} = await openai.createCompletion("text-davinci-001", {
-        prompt: prompt,
-        max_tokens: 6
+    try{const {data} = await openai.createCompletion("text-davinci-001", {
+        prompt: prompt
     })
-    console.log(data)
-    return 'Successful Call'
+    console.log(data.choices)} catch(error){
+      console.error(error)
+    }
 } 
 
+module.exports = {completeMe}
