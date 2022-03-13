@@ -4,7 +4,7 @@
   "description": "ai poetic partner",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "",
     "start:dev": "webpack serve --config ./webpack.config.js --mode development"
   },
   "repository": {
@@ -27,6 +27,7 @@
     "core-js": "^3.21.1",
     "dotenv": "^16.0.0",
     "jest": "^27.5.1",
+    "morgan": "^1.10.0",
     "openai": "^2.0.4",
     "pg": "^8.7.3",
     "react-dom": "^17.0.2",

@@ -6,7 +6,8 @@ module.exports = {
     client,
     getAllUsers,
     getPoemsByUserId,
-    getLinesByPoemId
+    getLinesByPoemId,
+    testDb
 }
 
 //database adapters
@@ -74,5 +75,3 @@ async function init(){
     
 
 }
-
-init()
