@@ -7,11 +7,14 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration)
 
-async function completeMe({prompt, temperature}) {
+async function completeMe(prompt, temperature) {
     try{const {data} = await openai.createCompletion("text-davinci-001", {
-        prompt: prompt,
-        max_tokens:10,
-        temperature:temperature
+        prompt: `the next line in the poem after ${prompt}`,
+        max_tokens: 14,
+        temperature:temperature,
+        top_p: 1.0,
+        frequency_penalty: 1.0,
+        presence_penalty: 1.0
     })
     return data.choices[0]
   
