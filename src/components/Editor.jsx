@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-const {completeMe} = require( '../../database/routes');
+import useAI from './hooks/useAI.jsx'
 
 export default function MyEditor() {
   const [poem, setPoem] = useState([]);
-  const [line, setLineState] = useState('');
+  const [line, setLine] = useState('');
+  const {newCompletion, setTemp}= useAI( 'Sheep dream of cotton robots')
 
   function handleChange(e) {
-    setLineState(e.target.value);
+    setLine(e.target.value);
   }
 
   function handleKey(event) {
@@ -14,10 +15,10 @@ export default function MyEditor() {
       event.preventDefault();
       event.target.value = '';
       setPoem([...poem, line]);
-      setLineState('');
+      setLine('');
     } else if (event.key === 'a' && event.getModifierState('Control')) {
       event.preventDefault();
-      completeMe(line)
+      setPoem([...poem, newCompletion(line)])
     }
   }
 
