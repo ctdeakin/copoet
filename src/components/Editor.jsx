@@ -1,39 +1,27 @@
-import React from 'react';
-import { Editor, EditorState, Modifier} from 'draft-js';
-import { getDefaultKeyBinding, KeyBindingUtil } from 'draft-js';
-const { hasCommandModifier } = KeyBindingUtil;
-import { completeMe } from '../../database/routes';
+import React, {useState} from 'react';
+
 
 export default function MyEditor() {
-  const [editorState, setEditorState] = React.useState(() =>
-    EditorState.createEmpty()
-  );
+  const [poem, setPoem] = useState([])
+  const [line, setLineState] = useState('');
 
-  function callAIKeyBinding(e) {
-    if (e.key === 'Enter' && hasCommandModifier(e)) {
-      return 'call-ai';
-    }
-    return getDefaultKeyBinding(e);
+  function handleChange(e) {
+    setLineState(e.target.value) 
   }
 
- function handleKeyCommand(command) {
-    if (command === 'call-ai') {
-      let contentState = editorState.getCurrentContent();
-      Modifier.replaceText(contentState, editorState.getSelection(), 'another test')
-      setEditorState(
-        editorState.push(editorState, contentState, 'insert-fragment')
-      )
-      return 'handled';
+  function handleKey(event) {
+    if(event.key==='Enter'){
+      event.preventDefault()
+      event.target.value = ''
+      setPoem([...poem, line])
+      setLineState('')
     }
-    return 'not-handled';
   }
 
   return (
-    <Editor
-      editorState={editorState}
-      onChange={setEditorState}
-      handleKeyCommand={handleKeyCommand}
-      keyBindingFn={callAIKeyBinding}
-    />
+    <div>
+      {poem.map(line=> <div>{line}</div>)}
+      <input onChange={handleChange} onKeyDown={handleKey}/>
+    </div>
   );
 }

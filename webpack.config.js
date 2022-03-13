@@ -29,7 +29,6 @@ module.exports = (env) => {
   },
   plugins: [
     new webpack.EnvironmentPlugin(['OPENAI_API_KEY']),
-    "@babel/plugin-transform-runtime"
   ],
   devServer: {
     static: path.resolve(__dirname, './public'),
