@@ -1,7 +1,10 @@
+import "core-js"
+import "regenerator-runtime/runtime.js";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app.jsx';
 import '../public/main.css'
+
 
 
 ReactDOM.render(

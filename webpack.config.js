@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const Dotenv = require('dotenv-webpack');
+
 require('dotenv').config({ path: './.env' })
 module.exports = (env) => {
   
@@ -29,6 +29,7 @@ module.exports = (env) => {
   },
   plugins: [
     new webpack.EnvironmentPlugin(['OPENAI_API_KEY']),
+   
   ],
   devServer: {
     static: path.resolve(__dirname, './public'),
