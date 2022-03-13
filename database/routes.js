@@ -7,11 +7,15 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration)
 
-async function completeMe(prompt) {
+async function completeMe({prompt, temperature}) {
     try{const {data} = await openai.createCompletion("text-davinci-001", {
-        prompt: prompt
+        prompt: prompt,
+        max_tokens:10,
+        temperature:temperature
     })
-    console.log(data.choices)} catch(error){
+    return data.choices[0]
+  
+    } catch(error){
       console.error(error)
     }
 } 
