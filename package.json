@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "",
+    "start": "webpack build && node server.js",
     "start:dev": "webpack serve --config ./webpack.config.js --mode development"
+    
   },
   "repository": {
     "type": "git",

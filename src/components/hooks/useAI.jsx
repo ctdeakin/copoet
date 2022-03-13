@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {completeMe} from '../OpenAi'
+import completeMe from '../../OpenAi.js'
 
 function useAI(initialPrompt) {
     //temperature sets degree of creativity/randomness for response
