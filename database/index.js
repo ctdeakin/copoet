@@ -1,12 +1,14 @@
 const {Client} = require('pg')
 const CONNECTION_STRING = 'postgres://localhost:5432/copoet'
 const client = new Client(CONNECTION_STRING)
+var format = require('pg-format')
 
 module.exports = {
     client,
     getAllUsers,
     getPoemsByUserId,
     getLinesByPoemId,
+    postPoemByUserId,
     testDb
 }
 
@@ -49,6 +51,23 @@ async function getLinesByPoemId(poemId) {
     }
 }
 
+
+async function postPoemByUserId(userId, poem) {
+    try{
+       const { rows: poemId }= await client.query(`
+        INSERT INTO poems (poet, title) VALUES ($1, $2) RETURNING id;
+       `, [userId, poem.title])
+
+       let {lines} = poem.lines
+       const linesWithId = lines.map(line => [line.content, poemId[0].id])
+       console.log(linesWithId)
+       const response = await client.query(format("INSERT INTO lines (content, poem) VALUES %L RETURNING *;"
+       , linesWithId))
+        return response
+    } catch(error){
+        throw(error)
+    }
+}
 
 
 async function testDb(){

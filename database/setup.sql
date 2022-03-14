@@ -14,7 +14,7 @@ CREATE TABLE poems (
 CREATE TABLE lines (
     id SERIAL PRIMARY KEY,
     content TEXT NOT NULL,
-    line_author author, 
+    line_author author DEFAULT 'user', 
     poem INTEGER REFERENCES poems (id)
 
 );

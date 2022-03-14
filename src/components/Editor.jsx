@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import useAI from './hooks/useAI.jsx'
 import useTitle from './hooks/useTitle.jsx'
 import Title from './Title.jsx'
+import Sidebar from './Sidebar.jsx'
 
 export default function MyEditor(props) {
   const [poem, setPoem] = useState([]);
-  const [line, setLine] = useState('');
+  const [line, setLine] = useState({content: '', author: 'user'});
   const [title, setTitle] = useTitle('')
   const {newCompletion}= useAI(title||'')
 
   function handleChange(e) {
-    setLine(e.target.value);
+    setLine({...line, content: e.target.value});
   }
 
   function handleKey(event) {
@@ -20,28 +21,22 @@ export default function MyEditor(props) {
       setPoem([...poem, line]);
       setLine('');
     } else if (event.key === 'a' && event.getModifierState('Control')) {
-      if(line.length>0) {
         event.preventDefault();
-        newCompletion(line).then(newLine=>{
-          setLine(line + newLine)
-          event.target.value=line
-        }) 
-      } else {
-        event.preventDefault();
-        newCompletion(poem[poem.length-1]).then(newLine=>setPoem([...poem, newLine]))
+        newCompletion(poem[poem.length-1]).then(newLine=>setPoem([...poem, {content:newLine, author: 'ai'}]))
       }
       
-      
-    }
   }
 
   return (
-    <div>
+    <div className="view">
+      <div className="editor">
       <Title setTitle={setTitle} title={title}/>
       {poem.map((line,idx) => (
         <div key={idx}>{line}</div>
       ))}
       <input onChange={handleChange} onKeyDown={handleKey} />
+      </div>
+      <Sidebar className="sidebar" setPoem={setPoem} setLine={setLine} setTitle={setTitle} draft={{poem, title}}/>
     </div>
   );
 }

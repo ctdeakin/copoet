@@ -1,0 +1,30 @@
+div{
+    font-family: 'Bitter', serif;
+}
+
+.view{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+}
+
+.sidebar{
+    direction: column;
+    
+}
+
+input{
+    font-family: 'Bitter', serif;
+    border:none;
+}
+
+button {
+    margin: 5px;
+    border: none;
+    background-color: white;
+    font-family: 'Bitter', serif;
+}
+
+button:hover {
+    background-color:dimgrey;
+}

@@ -1,10 +1,14 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Editor from './Editor.jsx'
-import Title from './Title.jsx'
+import Sidebar from './Sidebar.jsx'
+import useAI from './hooks/useAI.jsx'
+
+
 
 export default function Home() {
+
     return (
-        <div>
+        <div className='home'>
            <Editor />
         </div>
     )
