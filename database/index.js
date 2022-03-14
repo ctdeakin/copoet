@@ -57,10 +57,8 @@ async function postPoemByUserId(userId, poem) {
        const { rows: poemId }= await client.query(`
         INSERT INTO poems (poet, title) VALUES ($1, $2) RETURNING id;
        `, [userId, poem.title])
-
-       let {lines} = poem.lines
+       let lines = poem.lines
        const linesWithId = lines.map(line => [line.content, poemId[0].id])
-       console.log(linesWithId)
        const response = await client.query(format("INSERT INTO lines (content, poem) VALUES %L RETURNING *;"
        , linesWithId))
         return response

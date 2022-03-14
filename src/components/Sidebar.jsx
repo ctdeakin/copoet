@@ -9,18 +9,20 @@ export default function Sidebar(props){
         props.setPoem([])
         props.setTitle('')
     }
-    function handleClick(e) {
+    async function handleClick(e) {
         switch(e.target.value){
             case 'new':
                 reset()
                 return
             case 'save':
                 let {poem, title} = props.draft
-                axios.post('/api/poems', {poem, title})
+                console.log(poem, title)
+                await axios.post('/api/poems', {poem, title})
                 reset()
             case 'export':
                 
             case 'poems':
+                await axios.get('/api/poems')
         }
     }
 

@@ -11,7 +11,7 @@ export default function MyEditor(props) {
   const {newCompletion}= useAI(title||'')
 
   function handleChange(e) {
-    setLine({...line, content: e.target.value});
+    setLine({content: e.target.value, author:'user'});
   }
 
   function handleKey(event) {
@@ -32,7 +32,7 @@ export default function MyEditor(props) {
       <div className="editor">
       <Title setTitle={setTitle} title={title}/>
       {poem.map((line,idx) => (
-        <div key={idx}>{line}</div>
+        <div key={idx}>{line.content}</div>
       ))}
       <input onChange={handleChange} onKeyDown={handleKey} />
       </div>
