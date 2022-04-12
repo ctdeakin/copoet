@@ -1,7 +1,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const {client} = require('./database')
-const PORT = 5500
+const PORT = process.env.PORT
 const server = express()
 const apiRouter = require('./api')
 
