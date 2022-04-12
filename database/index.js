@@ -1,6 +1,7 @@
 const {Client} = require('pg')
+const CONNECTION_STRING = process.env.DATABASE_URL || 'postgres://localhost:5432/copoet'
 const client = new Client({
-    connectionString: process.env.DATABASE_URL,
+    connectionString: CONNECTION_STRING,
     ssl: {
       rejectUnauthorized: false
     }

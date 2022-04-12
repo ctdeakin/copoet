@@ -1,7 +1,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const {client} = require('./database')
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 8080;
 const server = express()
 const apiRouter = require('./api')
 
@@ -34,5 +34,5 @@ const handle = server.listen(PORT, async ()=> {
 })
 
 module.exports = {
-    handle, PORT
+   handle, PORT
 }
