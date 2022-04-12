@@ -1,6 +1,10 @@
 const {Client} = require('pg')
-const CONNECTION_STRING = 'postgres://localhost:5432/copoet'
-const client = new Client(CONNECTION_STRING)
+const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+  });
 var format = require('pg-format')
 
 module.exports = {
