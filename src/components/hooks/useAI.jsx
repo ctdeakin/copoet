@@ -3,7 +3,7 @@ import completeMe from '../../OpenAi.js'
 
 function useAI(initialPrompt) {
     //temperature sets degree of creativity/randomness for response
-    const [temp, setTemp] = useState(.5)
+    const [temp, setTemp] = useState(.9)
 
     async function newCompletion(prompt){
         let newPrompt = prompt||initialPrompt
