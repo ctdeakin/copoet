@@ -1,11 +1,13 @@
 const webpack = require('webpack');
 const path = require('path');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 require('dotenv').config({ path: './.env' })
 module.exports = (env) => {
   
   return {
   entry: path.resolve(__dirname, './src/index.jsx'),
+  node: false,
   module: {
     rules: [
       {
@@ -19,12 +21,18 @@ module.exports = (env) => {
       }
     ]
   },
+  externals: {
+    bufferutil: "bufferutil",
+    "utf-8-validate": "utf-8-validate",
+  },
   resolve: {
     extensions: ['*', '.js', 'jsx'],
     fallback: {
       "fs": false,
       "path": false,
-      "os": false
+      "os": false,
+      "net": false,
+      "tls": false
     }
   },
   output: {
@@ -33,10 +41,12 @@ module.exports = (env) => {
   },
   plugins: [
     new webpack.EnvironmentPlugin(['OPENAI_API_KEY']),
+    new NodePolyfillPlugin()
    
   ],
   devServer: {
     static: path.resolve(__dirname, './public'),
     hot: true
   },
+ 
 }};
