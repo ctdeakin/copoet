@@ -4,6 +4,7 @@ import axios from 'axios';
 export default function Sidebar(props) {
   const [userPoems, setUserPoems] = useState([]);
   const [showList, setShowList] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
 
   function reset() {
     props.setLine('');
@@ -22,7 +23,7 @@ export default function Sidebar(props) {
         reset();
         return;
       case 'export':
-        //future feature to send poem to other file type
+      //future feature to send poem to other file type
       case 'poems':
         if (showList) {
           setShowList(!showList);
@@ -31,19 +32,23 @@ export default function Sidebar(props) {
           setUserPoems(data.poems);
           setShowList(!showList);
         }
+        return
+      case 'help':
+        setShowHelp((help) => !help);
     }
   }
 
   function PoemList() {
-     if(userPoems.length>0){
-            return <div>
-            {userPoems.map((poem) => (
-              <ul>{poem.title}</ul>
-            ))}
-          </div>
-        }
-    else{
-        return(<div>No Poems</div>)
+    if (userPoems.length > 0) {
+      return (
+        <div>
+          {userPoems.map((poem) => (
+            <ul>{poem.title}</ul>
+          ))}
+        </div>
+      );
+    } else {
+      return <div>No Poems</div>;
     }
   }
 
@@ -61,6 +66,10 @@ export default function Sidebar(props) {
       <button onClick={handleClick} value="poems">
         Poems
       </button>
+      <button onClick={handleClick} value="help">
+        Help
+      </button>
+      {showHelp && <p>Press ctrl-a for a GPT-3 generated line</p>}
       {showList && <PoemList />}
     </div>
   );

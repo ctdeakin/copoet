@@ -2,26 +2,41 @@ const express = require('express')
 const morgan = require('morgan')
 const {client} = require('./database')
 const PORT = process.env.PORT || 8080;
-const server = express()
+const app = express()
+const http = require('http')
+const server = http.createServer(app)
+const {Server} = require("socket.io")
+
+const io = new Server(server, {
+    cors: {
+        origin: "*"
+    }
+  })
 const apiRouter = require('./api')
 
 
 
-server.use(morgan('dev'))
-server.use(express.json())
-server.use(express.static('./public'))
+app.use(morgan('dev'))
+app.use(express.json())
+app.use(express.static('./public'))
 
-server.use('/api', apiRouter)
+app.use('/api', apiRouter)
 
-server.use('*', (req,res) => {
+app.use('*', (req,res) => {
     res.status(404).send('<h1>404 Not Found</h1>')
 })
 
-server.use((err, req, res, next) => {
+app.use((err, req, res, next) => {
     console.error(err)
     next(err)
 })
 
+io.on('connection', (socket) => {
+    console.log("user connected")
+    socket.on('entry', (msg) => {
+        socket.broadcast.emit('entry', msg)
+    })
+})
 const handle = server.listen(PORT, async ()=> {
     try{
         await client.connect()
