@@ -33,6 +33,8 @@ app.use((err, req, res, next) => {
 
 io.on('connection', (socket) => {
     console.log("user connected")
+
+
     socket.on('entry', (msg) => {
         socket.broadcast.emit('entry', msg)
     })

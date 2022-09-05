@@ -6,13 +6,14 @@ import Sidebar from './Sidebar.jsx'
 import socket from '../socket.js'
 
 
-export default function MyEditor(props) {
-  const [poem, setPoem] = useState([]);
+export default function MyEditor({poem, setPoem}) {
+  
   const [line, setLine] = useState({content: '', author: 'user'});
   const [title, setTitle] = useTitle('')
   const {newCompletion}= useAI(title||'')
 
-  useEffect(() => socket.on('entry', (msg) => {
+  useEffect(() => 
+  socket.on('entry', (msg) => {
     setPoem((poem) => [...poem, msg])
   }), [])
   

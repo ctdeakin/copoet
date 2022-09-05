@@ -1,16 +1,21 @@
 import React, {Input} from 'react'
+import {socket} from '../socket.js'
 
-export default function Title(props) {
+export default function Title({title, setTitle}) {
     const input = React.createRef()
 
     const handleSubmit = e => {
         e.preventDefault()
-        props.setTitle(input.current.value)
+        setTitle(input.current.value)
     }
     
+    const handleEdit = e => {
+        e.preventDefault()
+        setTitle(false)
+    }
 
-    if(props.title){
-        return <h1>{props.title}</h1>
+    if(title){
+        return <h1 onClick={handleEdit}>{title}</h1>
     } else
     return <form onSubmit={handleSubmit}><input placeholder="name your poem" ref={input}/></form>
 

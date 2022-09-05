@@ -5,11 +5,11 @@ import useAI from './hooks/useAI.jsx'
 
 
 
-export default function Home() {
+export default function Home({poem, setPoem}) {
 
     return (
         <div className='home'>
-           <Editor />
+           <Editor poem={poem} setPoem={setPoem}/>
         </div>
     )
 }
