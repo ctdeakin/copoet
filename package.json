@@ -23,6 +23,7 @@
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
+    "@supabase/supabase-js": "^2.0.0-rc.8",
     "@testing-library/dom": "^8.11.3",
     "@testing-library/react": "^12.1.4",
     "axios": "^0.26.1",
