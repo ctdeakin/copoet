@@ -1,5 +1,4 @@
 import React, {Input} from 'react'
-import {socket} from '../socket.js'
 
 export default function Title({title, setTitle}) {
     const input = React.createRef()
