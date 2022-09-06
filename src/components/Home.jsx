@@ -1,15 +1,17 @@
 import React, {useState} from 'react'
 import Editor from './Editor.jsx'
-import Sidebar from './Sidebar.jsx'
-import useAI from './hooks/useAI.jsx'
+import NameSelection from './NameSelection.jsx'
 
 
 
-export default function Home() {
+export default function Home({poetName, onNameSelection}) {
 
+    if(!poetName){
+        return <NameSelection onNameSelection={onNameSelection}/>
+    }
     return (
         <div className='home'>
-           <Editor />
+            <Editor />
         </div>
     )
 }

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "",
     "build": "webpack build",
-    "start": "node server.js",
+    "start": "node server",
     "start:dev": "webpack serve --config ./webpack.config.js --mode development"
   },
   "repository": {
@@ -23,8 +23,6 @@
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
-    "@testing-library/dom": "^8.11.3",
-    "@testing-library/react": "^12.1.4",
     "axios": "^0.26.1",
     "bufferutil": "^4.0.6",
     "core-js": "^3.21.1",
@@ -42,7 +40,9 @@
     "socket.io": "^4.5.1",
     "socket.io-client": "^4.5.1",
     "style-loader": "^3.3.1",
-    "utf-8-validate": "^5.0.9"
+    "utf-8-validate": "^5.0.9",
+    "y-websocket": "^1.4.4",
+    "yjs": "^13.5.41"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.16.7",

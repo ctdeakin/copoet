@@ -1,19 +1,22 @@
 const express = require('express')
 const morgan = require('morgan')
-const {client} = require('./database')
+const {client} = require('../database')
 const PORT = process.env.PORT || 8080;
 const app = express()
 const http = require('http')
 const server = http.createServer(app)
-const {Server} = require("socket.io")
+const {Server} = require('socket.io')
+
+
 
 const io = new Server(server, {
     cors: {
         origin: "*"
     }
   })
-const apiRouter = require('./api')
 
+
+const apiRouter = require('../api')
 
 
 app.use(morgan('dev'))

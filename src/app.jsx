@@ -1,16 +1,19 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import Home from './components/Home.jsx'
-import socket, {initSocket} from './socket.js'
+import socket from './socket.js'
 
 export default function App() {
 
-    useEffect(() => {
-        initSocket(socket)
-    }, [])
+    const {isNamed, setName} = useState(false)
+
+    const onNameSelection = (e) => {
+        e.preventDefault()
+        setPoetName(e.target.value)
+    }
 
     return (
     <div>
-        <Home />
+        <Home poetName setPoetName onNameSelection/>
     </div>
 )
 }

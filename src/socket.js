@@ -1,8 +1,9 @@
-import io from 'socket.io-client'
+import { io } from "socket.io-client";
 
-let socket = io(window.location.origin)
+const URL = process.env.PORT
+const socket = io(URL, { autoConnect: false });
 
-export const initSocket = (socket) => {
-    socket.on("connect", () => console.log("Connected~"))
-  }
-export default socket
+socket.onAny((event, ...args) => {
+  console.log(event, args)
+})
+export default socket;
